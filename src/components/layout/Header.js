@@ -1,0 +1,14 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from 'react';
+import { Bell, HelpCircle, Menu, Search } from 'lucide-react';
+import { useAuth } from '../../lib/simplified-auth';
+import { Link } from 'wouter';
+import { Flame } from 'lucide-react';
+export default function Header() {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const onOpenSidebar = () => setSidebarOpen(true);
+    const { user } = useAuth();
+    const [searchValue, setSearchValue] = useState('');
+    return (_jsx("header", { className: "bg-white shadow-sm border-b border-neutral-100", children: _jsxs("div", { className: "flex items-center justify-between px-4 py-3", children: [_jsx("button", { type: "button", className: "md:hidden text-neutral-500 hover:text-neutral-600", onClick: onOpenSidebar, children: _jsx(Menu, { className: "h-6 w-6" }) }), _jsxs("div", { className: "md:hidden flex items-center gap-2", children: [_jsx("div", { className: "bg-primary-600 text-white p-1 rounded", children: _jsx(Flame, { className: "h-5 w-5" }) }), _jsx("span", { className: "text-lg font-semibold text-primary-600", children: "Ignite Labs" })] }), _jsx("div", { className: "hidden md:flex items-center flex-1 max-w-xl ml-8", children: _jsxs("div", { className: "relative w-full", children: [_jsx("div", { className: "absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none", children: _jsx(Search, { className: "h-5 w-5 text-neutral-400" }) }), _jsx("input", { type: "text", value: searchValue, onChange: (e) => setSearchValue(e.target.value), className: "block w-full pl-10 pr-3 py-2 border border-neutral-200 rounded-md leading-5 bg-neutral-50 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500", placeholder: "Search for courses, assignments, etc." })] }) }), _jsxs("div", { className: "flex items-center", children: [_jsxs("button", { type: "button", className: "p-2 text-neutral-500 hover:text-neutral-600 relative", children: [_jsx(Bell, { className: "h-6 w-6" }), _jsx("span", { className: "absolute top-1 right-1 block h-2 w-2 rounded-full bg-primary-600 ring-2 ring-white" })] }), _jsx("button", { type: "button", className: "p-2 text-neutral-500 hover:text-neutral-600", children: _jsx(HelpCircle, { className: "h-6 w-6" }) }), _jsx("div", { className: "ml-2 md:hidden", children: _jsx(Link, { href: "/profile", children: _jsx("button", { type: "button", className: "flex items-center text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500", children: _jsx("div", { className: "h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 font-medium", children: user?.name?.split(' ').map((n) => n[0]).join('').toUpperCase() || 'U' }) }) }) })] })] }) }));
+}
+//# sourceMappingURL=Header.js.map

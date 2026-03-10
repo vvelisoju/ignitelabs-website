@@ -15,6 +15,8 @@ import {
   Users,
   ClipboardList,
   Phone,
+  Calendar,
+  Sparkles,
 } from "lucide-react";
 import { LeadCaptureDialog } from "../../components/leads/LeadCaptureDialog";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
@@ -93,7 +95,23 @@ export default function WebsiteHeaderPage() {
 
   return (
     <div className="w-full shadow-md bg-gradient-to-r from-black via-blue-900 to-black text-white sticky top-0 z-50">
-      <div className="w-full bg-white py-3 md:py-2 hidden md:block">
+      {/* Announcement Banner */}
+      <div className="w-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 text-white py-2 text-center">
+        <div className="container mx-auto px-4 flex items-center justify-center gap-2 flex-wrap">
+          <Sparkles className="h-4 w-4 animate-pulse" />
+          <span className="text-sm md:text-base font-bold">
+            Register for FREE Demo Class — Every Week!
+          </span>
+          <Calendar className="h-4 w-4" />
+          <LeadCaptureDialog
+            buttonText="Register Now"
+            formType="register"
+            buttonSize="sm"
+            buttonClassName="ml-2 bg-white text-orange-600 hover:bg-orange-50 font-bold text-xs md:text-sm px-3 py-1 rounded-full shadow-md"
+          />
+        </div>
+      </div>
+      <div className="w-full bg-white py-1.5 md:py-1 hidden md:block">
         {" "}
         {/* Red background for the whole bar */}
         <div className="container mx-auto px-4 md:px-8 flex flex-wrap items-center justify-between gap-4">

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { apiRequest } from "../../lib/queryClient";
+
 import {
   Form,
   FormControl,
@@ -12,13 +12,6 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import { useToast } from "../../hooks/use-toast";
 import { Loader2 } from "lucide-react";
 
@@ -126,19 +119,24 @@ export function LeadCaptureForm({
 
   const onSubmit = async (data: LeadFormValues) => {
     try {
-      // Add form type, status, and any extraData to the lead data
-      const leadData = {
-        ...data,
+      // Build payload for the external enquiry API
+      const enquiryData = {
+        source: "ignitelabs",
+        name: data.name,
+        phone: data.phone,
+        interestedIn: data.interestedIn,
+        message: data.message || null,
         formType,
-        source: data.source || "Website",
-        status: "new", // Initial status is "new"
-        notes: `Submitted via ${title} form on the landing page`,
-        ...(extraData ? { batchInfo: extraData } : {}),
+        extraData: extraData || null,
       };
 
-      console.log("leadData :", leadData);
-      // Send API request
-      const response = await apiRequest("POST", "/api/leads", leadData);
+      // Send to Invoice App external enquiry endpoint (public, no auth needed)
+      const apiBaseUrl = import.meta.env.VITE_ENQUIRY_API_URL || '';
+      const response = await fetch(`${apiBaseUrl}/external/enquiries`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(enquiryData),
+      });
 
       if (response.ok) {
         toast({
@@ -264,32 +262,21 @@ export function LeadCaptureForm({
                 <FormLabel className="text-sm font-medium">
                   I'm interested in
                 </FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="h-10">
-                      <SelectValue placeholder="Select an option" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="training">Training Program</SelectItem>
-                    <SelectItem value="internship">
-                      Internship Opportunity
-                    </SelectItem>
-                    <SelectItem value="certification">
-                      Webinar Registration
-                    </SelectItem>
-                    <SelectItem value="placement">
-                      Placement Assistance
-                    </SelectItem>
-                    <SelectItem value="fee_details">Fee Structure</SelectItem>
-                    <SelectItem value="general_info">
-                      General Inquiry
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
+                <FormControl>
+                  <select
+                    {...field}
+                    className="flex h-10 w-full items-center rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <option value="" disabled>Select an option</option>
+                    <option value="final_year_project">Final Year Project Training</option>
+                    <option value="training">Training Program</option>
+                    <option value="internship">Internship Opportunity</option>
+                    <option value="certification">Webinar Registration</option>
+                    <option value="placement">Placement Assistance</option>
+                    <option value="fee_details">Fee Structure</option>
+                    <option value="general_info">General Inquiry</option>
+                  </select>
+                </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
             )}

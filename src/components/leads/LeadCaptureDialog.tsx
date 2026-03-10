@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
+import { CheckCircle2 } from "lucide-react";
 import { LeadCaptureForm } from "./LeadCaptureForm"; // This component must exist and handle form fields
 
 interface LeadCaptureDialogProps {
@@ -54,6 +55,7 @@ export function LeadCaptureDialog({
 }: LeadCaptureDialogProps) {
   // Use internal state if isOpen and onOpenChange are not provided (for button-triggered usage)
   const [internalOpen, setInternalOpen] = React.useState(false);
+  const [showSuccess, setShowSuccess] = React.useState(false);
 
   // Determine which 'open' state to use: controlled (from parent) or internal
   const controlledOpen = typeof isOpen === "boolean" ? isOpen : internalOpen;
@@ -61,11 +63,26 @@ export function LeadCaptureDialog({
   const setOpen =
     typeof onOpenChange === "function" ? onOpenChange : setInternalOpen;
 
-  // Close the dialog and execute external success callback after successful form submission
+  // Show success message, then close dialog after delay
   const handleSuccess = () => {
-    setOpen(false); // Close dialog
+    setShowSuccess(true);
+    
+    // Auto-close after 3 seconds
+    setTimeout(() => {
+      setShowSuccess(false);
+      setOpen(false);
+      if (onSuccess) {
+        onSuccess();
+      }
+    }, 3000);
+  };
+
+  // Manual close from success screen
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
+    setOpen(false);
     if (onSuccess) {
-      onSuccess(); // Execute parent's success callback (e.g., navigate to thank you page)
+      onSuccess();
     }
   };
 
@@ -121,21 +138,46 @@ export function LeadCaptureDialog({
         </DialogTrigger>
       )}
       <DialogContent className="sm:max-w-md max-h-[80vh] md:max-h-[90vh] overflow-hidden">
-        <DialogHeader className="pb-2">
-          <DialogTitle>{title || getDefaultTitle()}</DialogTitle>
-          <DialogDescription>
-            {description || getDefaultDescription()}
-          </DialogDescription>
-        </DialogHeader>
-        <div className="overflow-y-auto pr-2 max-h-[calc(80vh-10rem)] md:max-h-[calc(90vh-10rem)]">
-          <LeadCaptureForm
-            formType={formType}
-            onSuccess={handleSuccess} // Pass the dialog's handleSuccess
-            onCancel={() => setOpen(false)}
-            extraData={extraData}
-            defaultMessage={defaultMessage}
-          />
-        </div>
+        {showSuccess ? (
+          // Success State
+          <div className="flex flex-col items-center justify-center py-8 px-4 text-center">
+            <div className="mb-4 rounded-full bg-green-100 p-3">
+              <CheckCircle2 className="h-12 w-12 text-green-600" />
+            </div>
+            <DialogTitle className="text-2xl font-bold text-gray-900 mb-2">
+              Thank You!
+            </DialogTitle>
+            <DialogDescription className="text-base text-gray-600 mb-6">
+              Your information has been submitted successfully. Our team will contact you soon.
+            </DialogDescription>
+            <Button
+              onClick={handleCloseSuccess}
+              className="bg-primary hover:bg-primary/90 text-white px-8"
+            >
+              Close
+            </Button>
+            <p className="text-xs text-gray-400 mt-4">This window will close automatically in 3 seconds</p>
+          </div>
+        ) : (
+          // Form State
+          <>
+            <DialogHeader className="pb-2">
+              <DialogTitle>{title || getDefaultTitle()}</DialogTitle>
+              <DialogDescription>
+                {description || getDefaultDescription()}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="overflow-y-auto pr-2 max-h-[calc(80vh-10rem)] md:max-h-[calc(90vh-10rem)]">
+              <LeadCaptureForm
+                formType={formType}
+                onSuccess={handleSuccess}
+                onCancel={() => setOpen(false)}
+                extraData={extraData}
+                defaultMessage={defaultMessage}
+              />
+            </div>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );

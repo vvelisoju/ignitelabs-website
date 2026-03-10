@@ -139,20 +139,13 @@ export function LeadCaptureForm({
       });
 
       if (response.ok) {
-        toast({
-          title: "Success!",
-          description:
-            "Your information has been submitted successfully. We'll contact you soon.",
-          variant: "default",
-        });
-
-        // If there's a success callback, call it
+        // Reset form
+        form.reset();
+        
+        // Call success callback (dialog will show success modal)
         if (onSuccess) {
           onSuccess();
         }
-
-        // Reset form
-        form.reset();
       } else {
         throw new Error("Failed to submit your information");
       }

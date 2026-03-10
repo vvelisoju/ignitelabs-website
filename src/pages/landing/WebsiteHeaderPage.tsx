@@ -111,32 +111,18 @@ export default function WebsiteHeaderPage() {
           />
         </div>
       </div>
-      <div className="w-full bg-white py-1.5 md:py-1 hidden md:block">
-        {" "}
-        {/* Red background for the whole bar */}
-        <div className="container mx-auto px-4 md:px-8 flex flex-wrap items-center justify-between gap-4">
-          {/* Enquire Now button */}
-          <span className="text-blue-700 font-semibold py-2 px-6 rounded-md">
-            Enquire Now
-          </span>
-          {/* Location and Phone Numbers */}
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 md:gap-4 flex-grow">
-            {locationContactData.map((location, index) => (
-              <div
-                key={index}
-                className="bg-blue-900 text-white px-3 py-2 rounded-md flex items-center gap-2 text-sm md:text-base whitespace-nowrap"
-              >
-                <Phone className="h-4 w-4 text-purple-400" />{" "}
-                {/* Pink/Purple Phone Icon */}
-                <a
-                  href={`tel:${location.phone}`}
-                  className="hover:text-orange-400 transition"
-                >
-                  {location.city}: {location.phone}
-                </a>
-              </div>
-            ))}
-          </div>
+      <div className="w-full bg-white py-1 hidden md:block">
+        <div className="container mx-auto px-4 md:px-8 flex items-center justify-end gap-3">
+          {locationContactData.map((location, index) => (
+            <a
+              key={index}
+              href={`tel:${location.phone}`}
+              className="inline-flex items-center gap-1.5 text-blue-900 hover:text-orange-500 transition text-sm font-medium"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              {location.city}: {location.phone}
+            </a>
+          ))}
         </div>
       </div>
       <header className="relative container mx-auto py-2 md:py-0 flex justify-between items-center px-4 font-bold">

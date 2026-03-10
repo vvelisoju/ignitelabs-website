@@ -15,22 +15,20 @@ import {
   ChevronLeft,
   ChevronRight,
   Code,
-  Flame,
   Phone,
   Monitor,
   Award,
   FileText,
-  MessageSquare,
   AlertTriangle,
   CheckSquare,
   Brain,
-  Globe,
   Github,
   Shield,
   Presentation,
-  Clock,
   MapPin,
-  Mail,
+  Star,
+  Zap,
+  Target,
 } from "lucide-react";
 import { LeadCaptureDialog } from "../../components/leads/LeadCaptureDialog";
 
@@ -72,47 +70,59 @@ const exampleProjects = [
 ];
 
 const whatStudentsReceive = [
-  { icon: <Code className="h-8 w-8" />, title: "Complete Final Year Project", desc: "Source Code included" },
-  { icon: <FileText className="h-8 w-8" />, title: "Project Report Guidance", desc: "Project PPT included" },
-  { icon: <Presentation className="h-8 w-8" />, title: "Live Project Demo", desc: "Showcase your working project" },
-  { icon: <Award className="h-8 w-8" />, title: "Internship Certificate", desc: "Mentor Support throughout" },
-];
-
-const whyChooseIgniteLabs = [
-  "Real-Time Project Training",
-  "Industry Relevant AI Technologies",
-  "Small Batch for Better Guidance",
-  "Support for Final Year Project Submission",
-  "Hands-on Learning Experience",
-  "Dedicated Mentor for Each Student",
+  { icon: <Code className="h-7 w-7" />, title: "Complete Final Year Project", desc: "Full source code with documentation" },
+  { icon: <FileText className="h-7 w-7" />, title: "Project Report & PPT", desc: "University-ready documentation" },
+  { icon: <Presentation className="h-7 w-7" />, title: "Live Project Demo", desc: "Showcase your working project" },
+  { icon: <Award className="h-7 w-7" />, title: "Internship Certificate", desc: "Industry-recognized credential" },
 ];
 
 const trackData = [
   {
     title: "MERN Full Stack Development",
     description:
-      "Master Frontend (React), Backend (Node.js, Express), Git, APIs, and MongoDB – everything to become a proficient full-stack developer.",
-    icon: <LayoutDashboard className="h-10 w-10 text-primary" />,
+      "Master React, Node.js, Express, MongoDB, Git & APIs. Build production-ready web applications and become a proficient full-stack developer ready for the Indian IT industry.",
+    icon: <LayoutDashboard className="h-10 w-10 text-blue-600" />,
     href: "/full-stack-web-development-course-with-job-assistance",
     imageUrl: "/assets/images/mern-course.png",
+    tags: ["React", "Node.js", "MongoDB", "Express"],
   },
   {
     title: "Data Science & Analytics",
     description:
-      "Deep dive into Python, SQL, Pandas, Power BI, and work with real-world datasets for actionable insights and impactful analysis.",
-    icon: <BarChart3 className="h-10 w-10 text-primary" />,
+      "Deep dive into Python, SQL, Pandas, Power BI, and work with real-world datasets. Learn data visualization, statistical analysis, and build actionable business insights.",
+    icon: <BarChart3 className="h-10 w-10 text-blue-600" />,
     href: "/advanced-data-science-training-in-hyderabad-and-warangal",
     imageUrl: "/assets/images/data-science.png",
+    tags: ["Python", "SQL", "Power BI", "Pandas"],
   },
   {
     title: "AI & Machine Learning",
     description:
-      "Explore Machine Learning, Deep Learning, Natural Language Processing (NLP), and Generative AI using Python and TensorFlow.",
-    icon: <LucideSparkles className="h-10 w-10 text-primary" />,
+      "Explore Machine Learning, Deep Learning, NLP, and Generative AI using Python and TensorFlow. Build real AI models that solve industry problems.",
+    icon: <LucideSparkles className="h-10 w-10 text-blue-600" />,
     href: "/advanced-ai-and-machine-learning-training-in-hyderabad-and-warangal",
     imageUrl: "/assets/images/ai-course.png",
+    tags: ["Python", "TensorFlow", "NLP", "Deep Learning"],
   },
 ];
+
+const whyChooseCards = [
+  { icon: <Users className="h-7 w-7" />, title: "Industry Expert Mentors", desc: "Learn from professionals working at top tech companies with real industry experience.", color: "blue" },
+  { icon: <ClipboardCheck className="h-7 w-7" />, title: "Hands-on Project Training", desc: "Build real-world projects from scratch — not just theory. Your portfolio speaks for you.", color: "green" },
+  { icon: <Briefcase className="h-7 w-7" />, title: "Internship & Certification", desc: "Get internship experience and industry-recognized certification from Ignite Labs, Warangal.", color: "orange" },
+  { icon: <Trophy className="h-7 w-7" />, title: "Placement Assistance", desc: "Resume building, mock interviews, and connections with hiring partners across Telangana and India.", color: "red" },
+  { icon: <BookOpen className="h-7 w-7" />, title: "Small Batch Size", desc: "Limited to 15 students per batch ensuring personalized attention and dedicated mentor support.", color: "purple" },
+  { icon: <GraduationCap className="h-7 w-7" />, title: "Lifetime Community Access", desc: "Join our alumni network for continuous learning, job referrals, and tech community events.", color: "indigo" },
+];
+
+const colorMap: Record<string, { bg: string; text: string; hoverBg: string }> = {
+  blue: { bg: "bg-blue-100", text: "text-blue-600", hoverBg: "group-hover:bg-blue-600" },
+  green: { bg: "bg-green-100", text: "text-green-600", hoverBg: "group-hover:bg-green-600" },
+  orange: { bg: "bg-orange-100", text: "text-orange-600", hoverBg: "group-hover:bg-orange-600" },
+  red: { bg: "bg-red-100", text: "text-red-600", hoverBg: "group-hover:bg-red-600" },
+  purple: { bg: "bg-purple-100", text: "text-purple-600", hoverBg: "group-hover:bg-purple-600" },
+  indigo: { bg: "bg-indigo-100", text: "text-indigo-600", hoverBg: "group-hover:bg-indigo-600" },
+};
 
 export default function LandingPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -137,9 +147,9 @@ export default function LandingPage() {
   }, [currentImageIndex]);
 
   return (
-    <div>
+    <main>
       {/* ===== HERO SECTION ===== */}
-      <section className="relative min-h-[600px] md:min-h-[650px] overflow-hidden">
+      <section className="relative min-h-[600px] md:min-h-[650px] overflow-hidden" aria-label="Hero — Final Year Project Training in Warangal">
         {heroImages.map((imageUrl, index) => (
           <div
             key={index}
@@ -166,18 +176,20 @@ export default function LandingPage() {
             <span className="text-white">AI / Machine Learning</span>
             <br />
             <span className="bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">
-              Final Year Project Internship
+              Final Year Project Training
             </span>
+            <br />
+            <span className="text-2xl sm:text-3xl md:text-4xl text-gray-200">in Warangal</span>
           </h1>
 
           <p className="text-base md:text-xl max-w-3xl mx-auto mb-6 font-medium text-gray-200 drop-shadow leading-relaxed">
-            Build Your Final Year AI Project with Expert Mentorship. Get trained by
-            <strong> real-time Artificial Intelligence and Machine Learning</strong> project training
-            specially designed for <strong>B.Tech Final Year Students</strong>.
+            Build your <strong>B.Tech / Degree final year project</strong> with expert mentorship at
+            <strong> Ignite Labs, Warangal</strong>. Real-time <strong>AI, Machine Learning, MERN Full Stack &amp; Data Science</strong> project
+            training designed for students across Telangana.
           </p>
 
-          {/* Checklist - matching attachment image 3 */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mb-8 text-left">
+          {/* Checklist */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-8 text-left">
             {[
               "Select Project",
               "Build AI Model",
@@ -193,17 +205,17 @@ export default function LandingPage() {
 
           <div className="flex justify-center gap-4 flex-wrap mb-6">
             <LeadCaptureDialog
-              buttonText="Register Now"
+              buttonText="Register Now — Free Demo"
               formType="register"
               buttonClassName="px-8 py-4 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 transition-all text-lg font-semibold"
               buttonIcon={<ArrowRight className="ml-2 h-5 w-5" />}
             />
-            <a href="#program-details">
+            <a href="#programs">
               <Button
                 variant="outline"
-                className="px-8 py-4 border-2 border-primary text-white rounded-lg hover:bg-primary/80 hover:text-white transition-all text-lg font-semibold bg-transparent backdrop-blur-sm"
+                className="px-8 py-4 border-2 border-white/40 text-white rounded-lg hover:bg-white/10 transition-all text-lg font-semibold bg-transparent backdrop-blur-sm"
               >
-                Explore Our Programs
+                Explore Programs
               </Button>
             </a>
           </div>
@@ -252,45 +264,55 @@ export default function LandingPage() {
         )}
       </section>
 
-      {/* ===== PROGRAM HIGHLIGHTS ===== */}
-      <section className="py-16 bg-gradient-to-b from-blue-600 to-blue-700 text-white">
+      {/* ===== PROGRAM HIGHLIGHTS (White Section) ===== */}
+      <section className="py-16 bg-white" aria-label="Final Year Project Program Highlights">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-center">
-            Program Highlights
-          </h2>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+              Final Year Project <span className="text-blue-600">Program Highlights</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Everything you need to complete your B.Tech / Degree final year project successfully — from project selection to viva preparation.
+            </p>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {programHighlights.map((item, i) => (
               <div
                 key={i}
-                className="flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-4 hover:bg-white/20 transition-colors"
+                className="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 hover:border-blue-300 hover:shadow-md transition-all"
               >
-                <div className="bg-orange-500 rounded-full p-2.5 flex-shrink-0">
+                <div className="bg-orange-500 text-white rounded-full p-2.5 flex-shrink-0">
                   {item.icon}
                 </div>
-                <span className="text-sm md:text-base font-semibold leading-tight">{item.label}</span>
+                <span className="text-sm md:text-base font-semibold text-gray-800 leading-tight">{item.label}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== PROGRAM DETAILS ===== */}
-      <section id="program-details" className="py-16 bg-gradient-to-b from-gray-900 to-blue-900 text-white">
+      {/* ===== PROGRAM DETAILS (Blue Section) ===== */}
+      <section id="program-details" className="py-16 bg-gradient-to-b from-blue-700 to-blue-800 text-white" aria-label="AI ML Final Year Project Details Warangal">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-center">
-            Program Details
-          </h2>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+              AI / ML Final Year Project — <span className="text-orange-300">Program Details</span>
+            </h2>
+            <p className="text-blue-100 max-w-2xl mx-auto">
+              Our 8-week intensive program is designed for B.Tech &amp; Degree final year students in Warangal, Hyderabad, and across Telangana.
+            </p>
+          </div>
 
           {/* Program Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
             {[
-              { label: "Program Name", value: "AI / Machine Learning Final Year Project Internship" },
-              { label: "Duration", value: "8 Weeks" },
-              { label: "Batch Type", value: "Weekend / Weekday Batches" },
-              { label: "Batch Size", value: "Limited to 15 Students" },
+              { label: "Program", value: "AI / ML Final Year Project Internship" },
+              { label: "Duration", value: "8 Weeks Intensive" },
+              { label: "Batches", value: "Weekend & Weekday Available" },
+              { label: "Batch Size", value: "Only 15 Students" },
             ].map((item, i) => (
-              <div key={i} className="bg-blue-600 rounded-xl p-5">
-                <p className="text-sm font-bold text-orange-300 mb-1">{item.label}</p>
+              <div key={i} className="bg-white/10 border border-white/20 rounded-xl p-5 text-center">
+                <p className="text-xs font-bold text-orange-300 uppercase tracking-wider mb-1">{item.label}</p>
                 <p className="text-base font-semibold">{item.value}</p>
               </div>
             ))}
@@ -299,65 +321,86 @@ export default function LandingPage() {
           {/* What You Will Learn + Example Projects */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4">What You Will Learn</h3>
-              <ul className="space-y-2">
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                <Zap className="h-5 w-5" /> What You Will Learn
+              </h3>
+              <ul className="space-y-2.5">
                 {whatYouWillLearn.map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-white mt-0.5">•</span>
+                    <CheckSquare className="h-4 w-4 mt-0.5 flex-shrink-0" />
                     <span className="font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-2">Example Project Topics</h3>
-              <p className="text-sm text-gray-300 mb-4">Students can choose projects such as:</p>
-              <ul className="space-y-2">
+            <div className="bg-white/10 border border-white/20 rounded-xl p-6">
+              <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+                <Target className="h-5 w-5" /> Example Project Topics
+              </h3>
+              <p className="text-sm text-blue-200 mb-4">Students can choose from projects such as:</p>
+              <ul className="space-y-2.5">
                 {exampleProjects.map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-orange-400 mt-0.5">•</span>
+                    <span className="text-orange-400 mt-0.5 flex-shrink-0">▸</span>
                     <span className="font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
-              <p className="text-sm text-gray-400 mt-3 italic">(New projects are added regularly.)</p>
+              <p className="text-sm text-blue-300 mt-3 italic">(New topics added every semester)</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== WHAT STUDENTS WILL RECEIVE ===== */}
-      <section className="py-16 bg-gradient-to-b from-blue-700 to-blue-800 text-white">
+      {/* ===== WHAT STUDENTS RECEIVE (White Section) ===== */}
+      <section className="py-16 bg-white" aria-label="What students receive from Ignite Labs Warangal">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-center">
-            What Students Will Receive
-          </h2>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+              What Students <span className="text-orange-500">Will Receive</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Everything included — from complete source code to university-ready documentation and internship certification.
+            </p>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whatStudentsReceive.map((item, i) => (
-              <div key={i} className="flex flex-col items-center text-center bg-white/10 border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors">
-                <div className="bg-white/20 rounded-full p-4 mb-4">
+              <div key={i} className="flex flex-col items-center text-center bg-gray-50 border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-blue-300 transition-all">
+                <div className="bg-blue-600 text-white rounded-full p-4 mb-4">
                   {item.icon}
                 </div>
-                <h3 className="font-bold text-lg mb-1">{item.title}</h3>
-                <p className="text-sm text-gray-300">{item.desc}</p>
+                <h3 className="font-bold text-lg text-gray-900 mb-1">{item.title}</h3>
+                <p className="text-sm text-gray-600">{item.desc}</p>
               </div>
             ))}
           </div>
+          <div className="flex justify-center mt-10">
+            <LeadCaptureDialog
+              buttonText="Register Now — Limited Seats"
+              formType="register"
+              buttonClassName="px-8 py-4 bg-orange-500 text-white rounded-lg shadow-lg hover:bg-orange-600 transition-all text-lg font-bold"
+              buttonIcon={<ArrowRight className="ml-2 h-5 w-5" />}
+            />
+          </div>
         </div>
       </section>
 
-      {/* ===== WHO CAN JOIN + WHY CHOOSE IGNITE LABS ===== */}
-      <section className="py-16 bg-gradient-to-b from-blue-800 to-blue-900 text-white">
+      {/* ===== WHO CAN JOIN (Blue Section) ===== */}
+      <section className="py-16 bg-gradient-to-b from-blue-700 to-blue-800 text-white" aria-label="Who can join final year project training Warangal">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             {/* Who Can Join */}
             <div>
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-6">Who Can Join</h2>
-              <ul className="space-y-3">
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-6">
+                Who Can <span className="text-orange-300">Join This Program</span>
+              </h2>
+              <ul className="space-y-4">
                 {[
-                  "B.Tech / BE Final Year Students",
-                  "Computer Science / IT / ECE / EEE Students",
-                  "Students interested in Artificial Intelligence",
+                  "B.Tech / BE Final Year Students (CSE, IT, ECE, EEE, Mech)",
+                  "Degree Final Year Students (B.Sc, BCA, MCA)",
+                  "Students from Warangal, Hanamkonda, Kazipet & nearby areas",
+                  "Students from Hyderabad, Karimnagar, Khammam & across Telangana",
+                  "Anyone interested in learning AI, ML, or Data Science",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <CheckSquare className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5" />
@@ -365,18 +408,27 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-sm text-gray-300">
-                Basic programming knowledge is helpful but <strong className="text-white">not mandatory</strong>.
+              <p className="mt-5 text-sm text-blue-200">
+                No prior coding experience required — <strong className="text-white">we teach from basics</strong>.
               </p>
             </div>
 
-            {/* Why Choose Ignite Labs */}
-            <div className="bg-amber-700/80 border border-amber-600 rounded-xl p-6">
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-6">Why Choose Ignite Labs</h2>
-              <ul className="space-y-3">
-                {whyChooseIgniteLabs.map((item, i) => (
+            {/* Why Ignite Labs */}
+            <div className="bg-white/10 border border-white/20 rounded-xl p-6">
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-6">
+                Why Students Choose <span className="text-orange-300">Ignite Labs</span>
+              </h2>
+              <ul className="space-y-4">
+                {[
+                  "Real-Time Project Training (not copied from internet)",
+                  "Industry-Relevant AI & ML Technologies",
+                  "Small Batches — Only 15 Students",
+                  "Full Support for Project Submission & Viva",
+                  "Located in Warangal — Easy Access for Local Students",
+                  "Dedicated Mentor for Each Student",
+                ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <CheckSquare className="h-5 w-5 text-green-300 flex-shrink-0 mt-0.5" />
+                    <Star className="h-5 w-5 text-orange-400 flex-shrink-0 mt-0.5" />
                     <span className="font-medium">{item}</span>
                   </li>
                 ))}
@@ -386,54 +438,31 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ===== LIMITED SEATS ===== */}
-      <section className="py-12 bg-gradient-to-b from-blue-900 to-gray-900 text-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-6 text-center">Limited Seats</h2>
-          <div className="max-w-2xl mx-auto bg-white/10 border border-white/20 rounded-xl p-6 text-center">
-            <p className="text-base md:text-lg">
-              Each batch has <strong className="text-orange-400">only 15 students</strong> to ensure proper mentorship. Early registration is recommended.
-            </p>
-          </div>
-          <div className="flex justify-center mt-8">
-            <LeadCaptureDialog
-              buttonText="Register Now — Limited Seats"
-              formType="register"
-              buttonClassName="px-8 py-4 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 transition-all text-lg font-bold"
-              buttonIcon={<ArrowRight className="ml-2 h-5 w-5" />}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ===== TRENDING PROGRAMS ===== */}
-      <section
-        id="courses"
-        className="py-20 bg-gradient-to-b from-blue-900 to-blue-800"
-      >
+      {/* ===== TRENDING PROGRAMS 2026 (White Section) ===== */}
+      <section id="programs" className="py-20 bg-white" aria-label="Trending IT training programs 2026 Warangal Hyderabad">
         <div className="container mx-auto px-4">
           <div className="text-center mb-14">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
-              Trending Programs of <span className="text-primary">2026</span>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900">
+              Trending Programs of <span className="text-blue-600">2026</span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-              Stay ahead of the curve with our most in-demand programs, designed
-              to meet the evolving needs of the tech industry in India.
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+              Industry-ready IT training programs in MERN Full Stack, Data Science, and AI/ML — designed for students and freshers in Warangal &amp; Hyderabad.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {trackData.map((track, index) => (
-              <div
+              <article
                 key={index}
-                className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group border border-white/20"
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group border border-gray-200"
               >
-                <div className="w-full h-52 overflow-hidden bg-gradient-to-br from-blue-800 to-indigo-800 flex items-center justify-center">
+                <div className="w-full h-52 overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
                   {track.imageUrl ? (
                     <img
                       src={track.imageUrl}
-                      alt={track.title}
+                      alt={`${track.title} training course in Warangal`}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';
                       }}
@@ -442,119 +471,114 @@ export default function LandingPage() {
                   {track.icon}
                 </div>
                 <div className="p-5 flex flex-col items-start text-left">
-                  <h3 className="text-xl font-bold text-white mb-1 leading-tight">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight">
                     {track.title}
                   </h3>
-                  <p className="text-sm text-gray-300 mb-3 line-clamp-2">
+                  <p className="text-sm text-gray-600 mb-3 line-clamp-3">
                     {track.description}
                   </p>
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {track.tags.map((tag, ti) => (
+                      <span key={ti} className="text-xs font-medium bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full border border-blue-200">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                   <Link
                     href={track.href}
-                    className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors group-hover:underline text-sm"
+                    className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors text-sm"
                   >
                     Explore Course
-                    <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="ml-1.5 h-4 w-4 transform transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== WHY CHOOSE IGNITE LABS (Feature Cards) ===== */}
-      <section className="py-16 bg-gradient-to-b from-blue-900 to-blue-800 overflow-hidden">
-        <div className="container mx-auto px-6">
+      {/* ===== WHY CHOOSE IGNITE LABS (Blue Section) ===== */}
+      <section className="py-16 bg-gradient-to-b from-blue-700 to-blue-800 text-white overflow-hidden" aria-label="Why choose Ignite Labs IT training Warangal">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
-              Why Choose <span className="text-primary">Ignite Labs</span>?
+            <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+              Why Choose <span className="text-orange-300">Ignite Labs</span>?
             </h2>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              Your journey to a successful tech career in India starts here. We
-              provide a focused and effective learning experience designed for
-              real-world impact.
+            <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
+              Warangal's trusted IT training institute for real-world project-based learning. Your tech career starts here.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 border border-white/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
-              <div className="bg-indigo-500/30 text-indigo-300 rounded-full p-4 mb-4 transition-all duration-300 group-hover:bg-indigo-500 group-hover:text-white">
-                <Users className="h-8 w-8" />
-              </div>
-              <h3 className="font-bold text-xl text-white mb-2">Learn from Industry Experts</h3>
-              <p className="text-gray-300 text-base">
-                Our mentors are seasoned professionals from leading tech companies, providing insights relevant to the current job market.
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whyChooseCards.map((card, i) => {
+              const c = colorMap[card.color] || colorMap.blue;
+              return (
+                <div key={i} className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                  <div className={`${c.bg} ${c.text} rounded-full p-4 mb-4 transition-all duration-300 ${c.hoverBg} group-hover:text-white`}>
+                    {card.icon}
+                  </div>
+                  <h3 className="font-bold text-lg text-gray-900 mb-2">{card.title}</h3>
+                  <p className="text-gray-600 text-sm">{card.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== LOCATION & TRUST (White Section) ===== */}
+      <section className="py-16 bg-white" aria-label="Ignite Labs Warangal location and contact">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+                Visit <span className="text-blue-600">Ignite Labs</span> in Warangal
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Conveniently located in the heart of Warangal city. Walk-in enquiries welcome — or register online for a free demo class.
               </p>
             </div>
 
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 border border-white/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
-              <div className="bg-green-500/30 text-green-300 rounded-full p-4 mb-4 transition-all duration-300 group-hover:bg-green-500 group-hover:text-white">
-                <ClipboardCheck className="h-8 w-8" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-center">
+                <MapPin className="h-8 w-8 text-blue-600 mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-1">Our Address</h3>
+                <p className="text-sm text-gray-600">3rd Floor, Jakotia Complex, Opp. Ratna Hotel, Pochamma Maidan, Warangal, Telangana 506002</p>
               </div>
-              <h3 className="font-bold text-xl text-white mb-2">Hands-on Project-Based Learning</h3>
-              <p className="text-gray-300 text-base">
-                Build real-world projects from scratch, creating a strong portfolio that showcases your abilities to employers.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 border border-white/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
-              <div className="bg-yellow-500/30 text-yellow-300 rounded-full p-4 mb-4 transition-all duration-300 group-hover:bg-yellow-500 group-hover:text-white">
-                <Briefcase className="h-8 w-8" />
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-center">
+                <Phone className="h-8 w-8 text-green-600 mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-1">Call / WhatsApp</h3>
+                <a href="tel:9494644848" className="text-lg font-semibold text-blue-600 hover:text-orange-500 transition-colors">9494 644 848</a>
               </div>
-              <h3 className="font-bold text-xl text-white mb-2">Internship Experience</h3>
-              <p className="text-gray-300 text-base">
-                Get real work experience with internship certification, building crucial skills valued by Indian companies.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 border border-white/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
-              <div className="bg-red-500/30 text-red-300 rounded-full p-4 mb-4 transition-all duration-300 group-hover:bg-red-500 group-hover:text-white">
-                <Trophy className="h-8 w-8" />
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-center">
+                <Star className="h-8 w-8 text-orange-500 mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-1">Free Demo Every Week</h3>
+                <p className="text-sm text-gray-600">Register for a free demo class and experience our teaching methodology first-hand.</p>
               </div>
-              <h3 className="font-bold text-xl text-white mb-2">Dedicated Placement Support</h3>
-              <p className="text-gray-300 text-base">
-                Comprehensive placement assistance including resume building, interview preparation, and hiring partner connections.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 border border-white/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
-              <div className="bg-purple-500/30 text-purple-300 rounded-full p-4 mb-4 transition-all duration-300 group-hover:bg-purple-500 group-hover:text-white">
-                <BookOpen className="h-8 w-8" />
-              </div>
-              <h3 className="font-bold text-xl text-white mb-2">Industry-Recognized Certifications</h3>
-              <p className="text-gray-300 text-base">
-                Earn certifications valued by the tech industry, validating your skills and enhancing job prospects.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 border border-white/20 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
-              <div className="bg-blue-500/30 text-blue-300 rounded-full p-4 mb-4 transition-all duration-300 group-hover:bg-blue-500 group-hover:text-white">
-                <GraduationCap className="h-8 w-8" />
-              </div>
-              <h3 className="font-bold text-xl text-white mb-2">Community & Continuous Growth</h3>
-              <p className="text-gray-300 text-base">
-                Join a supportive community with lifetime access to resources for continuous growth in the tech landscape.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== FINAL CTA ===== */}
-      <section className="py-16 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 text-white text-center">
+      {/* ===== FINAL CTA (Dark Section) ===== */}
+      <section className="py-16 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 text-white text-center" aria-label="Register for IT training at Ignite Labs Warangal">
         <div className="container mx-auto px-4">
-          <p className="text-base text-gray-300 mb-2">Ignite Labs – AI Project Training Institute</p>
-          <h2 className="text-2xl md:text-4xl font-extrabold mb-8">
-            "Build AI Projects, Don't Just Buy Them"
+          <p className="text-sm text-blue-300 font-semibold uppercase tracking-wider mb-2">Ignite Labs — Warangal's Trusted IT Training Institute</p>
+          <h2 className="text-2xl md:text-4xl font-extrabold mb-3">
+            Build Real Projects. <span className="text-orange-400">Build Your Career.</span>
           </h2>
+          <p className="text-gray-300 max-w-xl mx-auto mb-8">
+            Don't buy projects — build them yourself with expert mentors. Limited seats available for the upcoming batch.
+          </p>
           <LeadCaptureDialog
-            buttonText="Register Now"
+            buttonText="Register Now — Free Demo Class"
             formType="register"
-            buttonClassName="px-10 py-4 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 transition-all text-xl font-bold"
+            buttonClassName="px-10 py-4 bg-orange-500 text-white rounded-lg shadow-lg hover:bg-orange-600 transition-all text-xl font-bold"
             buttonIcon={<ArrowRight className="ml-2 h-5 w-5" />}
           />
         </div>
       </section>
-    </div>
+    </main>
   );
 }

@@ -21,20 +21,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const fetchCurrentUser = async () => {
       try {
         const res = await fetch('/api/auth/me', { credentials: 'include' });
-        if (!res.ok) {
-          if (res.status === 401) {
-            setIsAuthenticated(false);
-            setUser(null);
-          } else {
-            console.error('Failed to fetch user:', res.statusText);
-          }
+        const contentType = res.headers.get('content-type') || '';
+        if (!res.ok || !contentType.includes('application/json')) {
+          setIsAuthenticated(false);
+          setUser(null);
         } else {
           const userData = await res.json();
           setUser(userData as any);
           setIsAuthenticated(true);
         }
       } catch (error) {
-        console.error('Error fetching user:', error);
         setIsAuthenticated(false);
         setUser(null);
       } finally {

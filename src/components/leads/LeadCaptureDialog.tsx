@@ -32,6 +32,8 @@ interface LeadCaptureDialogProps {
   extraData?: Record<string, any>;
   defaultMessage?: string;
 
+  defaultInterestedIn?: string;
+
   // New props for programmatic control from a parent component
   isOpen?: boolean; // Controls the dialog's open state externally
   onOpenChange?: (open: boolean) => void; // Callback to update external open state
@@ -49,6 +51,7 @@ export function LeadCaptureDialog({
   description,
   extraData,
   defaultMessage,
+  defaultInterestedIn,
   isOpen, // Destructure the new isOpen prop
   onOpenChange, // Destructure the new onOpenChange prop
   onSuccess, // Destructure the onSuccess prop
@@ -174,6 +177,7 @@ export function LeadCaptureDialog({
                 onCancel={() => setOpen(false)}
                 extraData={extraData}
                 defaultMessage={defaultMessage}
+                defaultInterestedIn={defaultInterestedIn}
               />
             </div>
           </>

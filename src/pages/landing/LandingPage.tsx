@@ -30,12 +30,34 @@ import {
   Zap,
   Target,
 } from "lucide-react";
-import { LeadCaptureDialog } from "../../components/leads/LeadCaptureDialog";
-
-const heroImages = [
-  "/assets/images/slide1.png",
-  "/assets/images/slide2.png",
-  "/assets/images/slide3.png",
+const heroSlides = [
+  {
+    image: "/assets/images/slide1.png",
+    badge: "Struggling with Final Year Projects?",
+    badgeIcon: "alert",
+    title: <>AI / Machine Learning<br /><span className="bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">Final Year Project Training</span></>,
+    subtitle: "in Warangal",
+    description: <>Build your <strong>B.Tech / Degree final year project</strong> with expert mentorship at <strong>Ignite Labs, Warangal</strong>. Real-time <strong>AI, Machine Learning, MERN Full Stack &amp; Data Science</strong> project training designed for students across Telangana.</>,
+    checklist: ["Select Project", "Build AI Model", "Create Frontend UI", "Prepare Project PPT"],
+  },
+  {
+    image: "/assets/images/slide2.png",
+    badge: "Industry-Ready Full Stack Training",
+    badgeIcon: "code",
+    title: <>MERN Full Stack<br /><span className="bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">Web Development Course</span></>,
+    subtitle: "with Job Assistance",
+    description: <>Master <strong>React, Node.js, Express & MongoDB</strong>. Build production-ready web applications and become a proficient <strong>full-stack developer</strong> ready for the Indian IT industry.</>,
+    checklist: ["React & Node.js", "REST APIs & MongoDB", "Real-Time Projects", "Job Assistance"],
+  },
+  {
+    image: "/assets/images/slide3.png",
+    badge: "High-Demand Career Track",
+    badgeIcon: "chart",
+    title: <>Data Science &<br /><span className="bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">Analytics Training</span></>,
+    subtitle: "in Hyderabad & Warangal",
+    description: <>Deep dive into <strong>Python, SQL, Pandas & Power BI</strong>. Learn data visualization, statistical analysis, and build actionable <strong>business insights</strong> with real-world datasets.</>,
+    checklist: ["Python & SQL", "Power BI Dashboards", "Real Datasets", "Industry Projects"],
+  },
 ];
 
 const programHighlights = [
@@ -125,17 +147,17 @@ const colorMap: Record<string, { bg: string; text: string; hoverBg: string }> = 
 };
 
 export default function LandingPage() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const goToPreviousSlide = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
+    setCurrentSlideIndex((prevIndex) =>
+      prevIndex === 0 ? heroSlides.length - 1 : prevIndex - 1
     );
   };
 
   const goToNextSlide = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1
+    setCurrentSlideIndex((prevIndex) =>
+      prevIndex === heroSlides.length - 1 ? 0 : prevIndex + 1
     );
   };
 
@@ -144,20 +166,21 @@ export default function LandingPage() {
       goToNextSlide();
     }, 5000);
     return () => clearInterval(intervalId);
-  }, [currentImageIndex]);
+  }, [currentSlideIndex]);
 
   return (
     <main>
       {/* ===== HERO SECTION ===== */}
       <section className="relative min-h-[600px] md:min-h-[650px] overflow-hidden" aria-label="Hero — Final Year Project Training in Warangal">
-        {heroImages.map((imageUrl, index) => (
+        {/* Background images */}
+        {heroSlides.map((slide, index) => (
           <div
             key={index}
             className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-              index === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+              index === currentSlideIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
             style={{
-              backgroundImage: `url("${imageUrl}")`,
+              backgroundImage: `url("${slide.image}")`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -166,71 +189,76 @@ export default function LandingPage() {
           </div>
         ))}
 
+        {/* Sliding content */}
         <div className="container mx-auto px-4 flex flex-col items-center justify-center h-full text-center relative z-20 text-white py-12 md:py-16">
-          <div className="inline-flex items-center gap-2 bg-yellow-500/20 border border-yellow-400/50 text-yellow-300 backdrop-blur-sm rounded-full px-4 py-1.5 mb-5 text-sm font-bold">
-            <AlertTriangle className="h-4 w-4" />
-            Struggling with Final Year Projects?
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
-            <span className="text-white">AI / Machine Learning</span>
-            <br />
-            <span className="bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">
-              Final Year Project Training
-            </span>
-            <br />
-            <span className="text-2xl sm:text-3xl md:text-4xl text-gray-200">in Warangal</span>
-          </h1>
-
-          <p className="text-base md:text-xl max-w-3xl mx-auto mb-6 font-medium text-gray-200 drop-shadow leading-relaxed">
-            Build your <strong>B.Tech / Degree final year project</strong> with expert mentorship at
-            <strong> Ignite Labs, Warangal</strong>. Real-time <strong>AI, Machine Learning, MERN Full Stack &amp; Data Science</strong> project
-            training designed for students across Telangana.
-          </p>
-
-          {/* Checklist */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-8 text-left">
-            {[
-              "Select Project",
-              "Build AI Model",
-              "Create Frontend UI",
-              "Prepare Project PPT",
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-white/15">
-                <CheckSquare className="h-5 w-5 text-green-400 flex-shrink-0" />
-                <span className="text-sm md:text-base font-semibold text-white">{item}</span>
+          {heroSlides.map((slide, index) => (
+            <div
+              key={index}
+              className={`w-full flex flex-col items-center transition-all duration-700 ease-in-out ${
+                index === currentSlideIndex
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4 absolute pointer-events-none"
+              }`}
+            >
+              <div className="inline-flex items-center gap-2 bg-yellow-500/20 border border-yellow-400/50 text-yellow-300 backdrop-blur-sm rounded-full px-4 py-1.5 mb-5 text-sm font-bold">
+                {slide.badgeIcon === "alert" && <AlertTriangle className="h-4 w-4" />}
+                {slide.badgeIcon === "code" && <Code className="h-4 w-4" />}
+                {slide.badgeIcon === "chart" && <BarChart3 className="h-4 w-4" />}
+                {slide.badge}
               </div>
-            ))}
-          </div>
 
-          <div className="flex justify-center gap-4 flex-wrap mb-6">
-            <LeadCaptureDialog
-              buttonText="Register Now — Free Demo"
-              formType="register"
-              buttonClassName="px-8 py-4 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 transition-all text-lg font-semibold"
-              buttonIcon={<ArrowRight className="ml-2 h-5 w-5" />}
-            />
-            <a href="#programs">
-              <Button
-                variant="outline"
-                className="px-8 py-4 border-2 border-white/40 text-white rounded-lg hover:bg-white/10 transition-all text-lg font-semibold bg-transparent backdrop-blur-sm"
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
+                <span className="text-white">{slide.title}</span>
+                <br />
+                <span className="text-2xl sm:text-3xl md:text-4xl text-gray-200">{slide.subtitle}</span>
+              </h1>
+
+              <p className="text-base md:text-xl max-w-3xl mx-auto mb-6 font-medium text-gray-200 drop-shadow leading-relaxed">
+                {slide.description}
+              </p>
+
+              {/* Checklist */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 mb-8 text-left">
+                {slide.checklist.map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-white/15">
+                    <CheckSquare className="h-5 w-5 text-green-400 flex-shrink-0" />
+                    <span className="text-sm md:text-base font-semibold text-white">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex justify-center gap-4 flex-wrap mb-6">
+                <Link href="/ai-ml-career-demo">
+                  <Button
+                    className="px-8 py-4 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 transition-all text-lg font-semibold"
+                  >
+                    Register Now — Free Demo
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <a href="#programs">
+                  <Button
+                    variant="outline"
+                    className="px-8 py-4 border-2 border-white/40 text-white rounded-lg hover:bg-white/10 transition-all text-lg font-semibold bg-transparent backdrop-blur-sm"
+                  >
+                    Explore Programs
+                  </Button>
+                </a>
+              </div>
+
+              <a
+                href="tel:9494644848"
+                className="inline-flex items-center gap-2 text-primary font-bold text-lg hover:text-orange-400 transition-colors"
               >
-                Explore Programs
-              </Button>
-            </a>
-          </div>
-
-          <a
-            href="tel:9494644848"
-            className="inline-flex items-center gap-2 text-primary font-bold text-lg hover:text-orange-400 transition-colors"
-          >
-            <Phone className="h-5 w-5" />
-            Call Now: 9494 644 848
-          </a>
+                <Phone className="h-5 w-5" />
+                Call Now: 9494 644 848
+              </a>
+            </div>
+          ))}
         </div>
 
         {/* Navigation Dots/Arrows */}
-        {heroImages.length > 1 && (
+        {heroSlides.length > 1 && (
           <>
             <button
               onClick={goToPreviousSlide}
@@ -247,21 +275,42 @@ export default function LandingPage() {
               <ChevronRight className="h-6 w-6" />
             </button>
             <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-30">
-              {heroImages.map((_, index) => (
+              {heroSlides.map((_, index) => (
                 <button
                   key={index}
                   className={`block h-3 w-3 rounded-full transition-all duration-300 ${
-                    index === currentImageIndex
+                    index === currentSlideIndex
                       ? "bg-primary w-6"
                       : "bg-gray-400 hover:bg-gray-200"
                   }`}
-                  onClick={() => setCurrentImageIndex(index)}
+                  onClick={() => setCurrentSlideIndex(index)}
                   aria-label={`Go to slide ${index + 1}`}
                 ></button>
               ))}
             </div>
           </>
         )}
+      </section>
+
+      {/* ===== EVENT ANNOUNCEMENT BANNER ===== */}
+      <section className="bg-gradient-to-r from-[#0a1628] via-[#0d2247] to-[#0a1628] border-y border-blue-800">
+        <div className="container mx-auto px-4 py-4">
+          <Link href="/ai-ml-career-demo">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 cursor-pointer group">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 bg-orange-500/20 border border-orange-400/30 text-orange-300 rounded-full px-3 py-1 text-xs font-bold">
+                  <Star className="h-3 w-3" /> UPCOMING EVENT
+                </span>
+                <span className="text-white font-bold text-sm md:text-base">
+                  AI & Machine Learning Career Demo — March 29
+                </span>
+              </div>
+              <span className="inline-flex items-center gap-1 text-orange-400 font-semibold text-sm group-hover:text-orange-300 transition-colors">
+                Register Free <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
+          </Link>
+        </div>
       </section>
 
       {/* ===== PROGRAM HIGHLIGHTS (White Section) ===== */}
@@ -375,12 +424,12 @@ export default function LandingPage() {
             ))}
           </div>
           <div className="flex justify-center mt-10">
-            <LeadCaptureDialog
-              buttonText="Register Now — Limited Seats"
-              formType="register"
-              buttonClassName="px-8 py-4 bg-orange-500 text-white rounded-lg shadow-lg hover:bg-orange-600 transition-all text-lg font-bold"
-              buttonIcon={<ArrowRight className="ml-2 h-5 w-5" />}
-            />
+            <Link href="/ai-ml-career-demo">
+              <Button className="px-8 py-4 bg-orange-500 text-white rounded-lg shadow-lg hover:bg-orange-600 transition-all text-lg font-bold">
+                Register Now — Limited Seats
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -571,12 +620,12 @@ export default function LandingPage() {
           <p className="text-gray-300 max-w-xl mx-auto mb-8">
             Don't buy projects — build them yourself with expert mentors. Limited seats available for the upcoming batch.
           </p>
-          <LeadCaptureDialog
-            buttonText="Register Now — Free Demo Class"
-            formType="register"
-            buttonClassName="px-10 py-4 bg-orange-500 text-white rounded-lg shadow-lg hover:bg-orange-600 transition-all text-xl font-bold"
-            buttonIcon={<ArrowRight className="ml-2 h-5 w-5" />}
-          />
+          <Link href="/ai-ml-career-demo">
+            <Button className="px-10 py-4 bg-orange-500 text-white rounded-lg shadow-lg hover:bg-orange-600 transition-all text-xl font-bold">
+              Register Now — Free Demo Class
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </section>
     </main>

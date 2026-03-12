@@ -96,21 +96,20 @@ export default function WebsiteHeaderPage() {
   return (
     <div className="w-full shadow-md bg-gradient-to-r from-black via-blue-900 to-black text-white sticky top-0 z-50">
       {/* Announcement Banner */}
-      <div className="w-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 text-white py-2 text-center">
-        <div className="container mx-auto px-4 flex items-center justify-center gap-2 flex-wrap">
-          <Sparkles className="h-4 w-4 animate-pulse" />
-          <span className="text-sm md:text-base font-bold">
-            Register for FREE Demo Class — Every Week!
-          </span>
-          <Calendar className="h-4 w-4" />
-          <LeadCaptureDialog
-            buttonText="Register Now"
-            formType="register"
-            buttonSize="sm"
-            buttonClassName="ml-2 bg-white text-orange-600 hover:bg-orange-50 font-bold text-xs md:text-sm px-3 py-1 rounded-full shadow-md"
-          />
+      <Link href="/ai-ml-career-demo">
+        <div className="w-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 text-white py-2 text-center cursor-pointer hover:from-orange-600 hover:via-orange-700 hover:to-orange-600 transition-all">
+          <div className="container mx-auto px-4 flex items-center justify-center gap-2 flex-wrap">
+            <Sparkles className="h-4 w-4 animate-pulse" />
+            <span className="text-sm md:text-base font-bold">
+              AI & Machine Learning Career Demo — Free Entry!
+            </span>
+            <Calendar className="h-4 w-4" />
+            <span className="ml-2 bg-white text-orange-600 font-bold text-xs md:text-sm px-3 py-1 rounded-full shadow-md">
+              Register Now
+            </span>
+          </div>
         </div>
-      </div>
+      </Link>
       <div className="w-full bg-white py-1 hidden md:block">
         <div className="container mx-auto px-4 md:px-8 flex items-center justify-end gap-3">
           {locationContactData.map((location, index) => (
@@ -175,22 +174,6 @@ export default function WebsiteHeaderPage() {
               items={coursesItems}
               location={location}
             />
-
-            {/* IT Scholars Program */}
-            <Link href="/it-scholars-program">
-              <div
-                className={`group flex items-center gap-2 px-3 py-1.5 cursor-pointer transition-all duration-300 ${
-                  location === "/it-scholars-program"
-                    ? "text-orange-400 font-semibold"
-                    : "text-white hover:text-orange-400"
-                }`}
-              >
-                {/* <span>{<DatabaseIcon />}</span> */}
-                <span className="text-sm md:text-base font-medium">
-                  IT Scholars Program
-                </span>
-              </div>
-            </Link>
 
             {/* Internship Dropdown */}
             <Dropdown

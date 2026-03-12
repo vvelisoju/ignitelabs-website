@@ -13,7 +13,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useToast } from "../../hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, Monitor, MapPin } from "lucide-react";
 
 // Form schema with validation
 const leadFormSchema = z.object({
@@ -22,6 +22,7 @@ const leadFormSchema = z.object({
   phone: z.string().min(10, { message: "Please enter a valid phone number" }),
   source: z.string().min(1, { message: "Please select how you found us" }),
   interestedIn: z.string().min(1, { message: "Please select an option" }),
+  mode: z.enum(["online", "offline"]).optional(),
   message: z.string().optional(),
 });
 
@@ -33,6 +34,9 @@ interface LeadCaptureFormProps {
   onCancel?: () => void;
   extraData?: Record<string, any>; // Additional data like batch information
   defaultMessage?: string;
+  defaultInterestedIn?: string;
+  defaultMode?: "online" | "offline";
+  showModeSelector?: boolean;
 }
 
 export function LeadCaptureForm({
@@ -41,6 +45,9 @@ export function LeadCaptureForm({
   onCancel,
   extraData,
   defaultMessage,
+  defaultInterestedIn,
+  defaultMode,
+  showModeSelector = false,
 }: LeadCaptureFormProps) {
   const { toast } = useToast();
 
@@ -51,7 +58,8 @@ export function LeadCaptureForm({
       // email: "",
       phone: "",
       source: "Website",
-      interestedIn: "",
+      interestedIn: defaultInterestedIn || "",
+      mode: defaultMode || undefined,
       message: defaultMessage || "",
     },
   });
@@ -127,7 +135,7 @@ export function LeadCaptureForm({
         interestedIn: data.interestedIn,
         message: data.message || null,
         formType,
-        extraData: extraData || null,
+        extraData: { ...(extraData || {}), ...(data.mode ? { mode: data.mode } : {}) },
       };
 
       // Send to Invoice App external enquiry endpoint (public, no auth needed)
@@ -162,24 +170,19 @@ export function LeadCaptureForm({
 
   return (
     <div className="w-full mx-auto p-2 pt-0">
-      {/* <div className="text-center mb-4">
-        <h3 className="text-xl font-bold">{title}</h3>
-        <p className="text-sm text-muted-foreground">{noteText}</p>
-      </div> */}
-
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem className="mb-2">
-                <FormLabel className="text-sm font-medium">Name</FormLabel>
+              <FormItem>
+                <FormLabel className="text-sm font-medium text-gray-700">Name</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Enter your full name"
                     {...field}
-                    className="h-10"
+                    className="h-10 text-gray-900 placeholder:text-gray-400 border-gray-300 focus:border-blue-500"
                   />
                 </FormControl>
                 <FormMessage className="text-xs" />
@@ -187,33 +190,19 @@ export function LeadCaptureForm({
             )}
           />
 
-          {/* <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="mb-2">
-                <FormLabel className="text-sm font-medium">Email</FormLabel>
-                <FormControl>
-                  <Input type="email" placeholder="Enter your email" {...field} className="h-10" />
-                </FormControl>
-                <FormMessage className="text-xs" />
-              </FormItem>
-            )}
-          /> */}
-
           <FormField
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem className="mb-2">
-                <FormLabel className="text-sm font-medium">
+              <FormItem>
+                <FormLabel className="text-sm font-medium text-gray-700">
                   Phone Number
                 </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Enter your phone number"
                     {...field}
-                    className="h-10"
+                    className="h-10 text-gray-900 placeholder:text-gray-400 border-gray-300 focus:border-blue-500"
                   />
                 </FormControl>
                 <FormMessage className="text-xs" />
@@ -221,46 +210,20 @@ export function LeadCaptureForm({
             )}
           />
 
-          {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-2"> */}
-          {/* <FormField
-              control={form.control}
-              name="source"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm font-medium">How did you hear about us?</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger className="h-10">
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="social_media">Social Media</SelectItem>
-                      <SelectItem value="search_engine">Search Engine</SelectItem>
-                      <SelectItem value="friend_referral">Friend Referral</SelectItem>
-                      <SelectItem value="advertisement">Advertisement</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage className="text-xs" />
-                </FormItem>
-              )}
-            /> */}
-
           <FormField
             control={form.control}
             name="interestedIn"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium">
+                <FormLabel className="text-sm font-medium text-gray-700">
                   I'm interested in
                 </FormLabel>
                 <FormControl>
                   <select
                     {...field}
-                    className="flex h-10 w-full items-center rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-10 w-full items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 ring-offset-background focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    <option value="" disabled>Select an option</option>
+                    <option value="" disabled className="text-gray-400">Select an option</option>
                     <option value="final_year_project">Final Year Project Training</option>
                     <option value="training">Training Program</option>
                     <option value="internship">Internship Opportunity</option>
@@ -268,28 +231,70 @@ export function LeadCaptureForm({
                     <option value="placement">Placement Assistance</option>
                     <option value="fee_details">Fee Structure</option>
                     <option value="general_info">General Inquiry</option>
+                    <option value="ai_ml_career_demo">AI & Machine Learning Career Demo</option>
                   </select>
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
             )}
           />
-          {/* </div> */}
+
+          {showModeSelector && (
+            <FormField
+              control={form.control}
+              name="mode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-gray-700">
+                    Preferred Mode
+                  </FormLabel>
+                  <FormControl>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => field.onChange("offline")}
+                        className={`flex items-center justify-center gap-2 rounded-lg border-2 px-3 py-2.5 text-sm font-semibold transition-all duration-200 ${
+                          field.value === "offline"
+                            ? "border-blue-600 bg-blue-50 text-blue-700 shadow-sm"
+                            : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                        }`}
+                      >
+                        <MapPin className="h-4 w-4" />
+                        Offline
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => field.onChange("online")}
+                        className={`flex items-center justify-center gap-2 rounded-lg border-2 px-3 py-2.5 text-sm font-semibold transition-all duration-200 ${
+                          field.value === "online"
+                            ? "border-green-600 bg-green-50 text-green-700 shadow-sm"
+                            : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                        }`}
+                      >
+                        <Monitor className="h-4 w-4" />
+                        Online
+                      </button>
+                    </div>
+                  </FormControl>
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              )}
+            />
+          )}
 
           <FormField
             control={form.control}
             name="message"
             render={({ field }) => (
-              <FormItem className="mb-3">
-                <FormLabel className="text-sm font-medium">
+              <FormItem>
+                <FormLabel className="text-sm font-medium text-gray-700">
                   Message (Optional)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    type="Textarea"
                     placeholder="Any specific questions or comments?"
                     {...field}
-                    className="h-10"
+                    className="h-10 text-gray-900 placeholder:text-gray-400 border-gray-300 focus:border-blue-500"
                   />
                 </FormControl>
                 <FormMessage className="text-xs" />
@@ -297,10 +302,10 @@ export function LeadCaptureForm({
             )}
           />
 
-          <div className="flex gap-2 pt-3">
+          <div className="flex gap-2 pt-2">
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-md hover:shadow-lg transition-all duration-300"
+              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-md hover:shadow-lg transition-all duration-300 font-bold h-11"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -317,15 +322,15 @@ export function LeadCaptureForm({
                 type="button"
                 variant="outline"
                 onClick={onCancel}
-                className="flex-shrink-0 border-primary/20 hover:bg-primary/5"
+                className="flex-shrink-0 border-gray-300 text-gray-700 hover:bg-gray-50"
               >
                 Cancel
               </Button>
             )}
           </div>
-          <p className="text-center text-xs text-muted-foreground mt-4">
+          <p className="text-center text-xs text-gray-400 mt-3">
             By submitting, you agree to our{" "}
-            <span className="text-primary hover:underline cursor-pointer">
+            <span className="text-blue-600 hover:underline cursor-pointer">
               Privacy Policy
             </span>
           </p>

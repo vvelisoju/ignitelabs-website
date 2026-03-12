@@ -29,6 +29,7 @@ import CampusAmbassadorPage from "./pages/landing/CampusAmbassadorPage";
 import PlacementPageIgniteLabs from "./pages/landing/PlacementPageIgniteLabs";
 import PartnerWithUsPage from "./pages/landing/PartnerWithUsPage";
 import FreeOnlineFullStackWebinarPage from "./pages/landing/FreeOnlineFullStackWebinarPage";
+import AICareerDemoPage from "./pages/landing/AICareerDemoPage";
 
 // AppShell component
 // function AppShell({ children }: { children: ReactNode }) {
@@ -184,6 +185,10 @@ function Router() {
             <CampusAmbassadorPage />
           </WebsiteLayout>
         )}
+      />
+      <Route
+        path="/ai-ml-career-demo"
+        component={() => <AICareerDemoPage />}
       />
       <Route
         path="/register"

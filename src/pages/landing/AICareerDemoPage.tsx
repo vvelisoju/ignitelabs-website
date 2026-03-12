@@ -224,6 +224,7 @@ export default function AICareerDemoPage() {
 
       {/* ===== MAIN CONTENT ===== */}
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12 relative z-10">
+        {/* Desktop: grid layout, Mobile: sequential order */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 items-start">
 
           {/* ── LEFT COLUMN: Event Details (3/5 width) ── */}
@@ -381,8 +382,8 @@ export default function AICareerDemoPage() {
               </div>
             </div>
 
-            {/* Topics covered */}
-            <div>
+            {/* Topics covered - Desktop only */}
+            <div className="hidden lg:block">
               <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
                 <Brain className="h-5 w-5 text-purple-400" />
                 What You'll Learn
@@ -405,8 +406,8 @@ export default function AICareerDemoPage() {
               </div>
             </div>
 
-            {/* Who should attend */}
-            <div>
+            {/* Who should attend - Desktop only */}
+            <div className="hidden lg:block">
               <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
                 <GraduationCap className="h-5 w-5 text-orange-400" />
                 Who Should Attend
@@ -507,6 +508,49 @@ export default function AICareerDemoPage() {
                   Call: {EVENT.phone}
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── BOTTOM SECTIONS: Mobile-first order (Topics, Who Should Attend) ── */}
+        <div className="mt-10 space-y-8 lg:hidden">
+          {/* Topics covered */}
+          <div>
+            <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+              <Brain className="h-5 w-5 text-purple-400" />
+              What You'll Learn
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {EVENT.topics.map((topic, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-3 bg-white/5 border border-white/8 rounded-lg p-3.5 hover:bg-white/10 hover:border-white/15 transition-all duration-300"
+                >
+                  <div className="flex-shrink-0 w-9 h-9 bg-blue-600/50 text-blue-200 rounded-lg flex items-center justify-center">
+                    {ICON_MAP[topic.icon] || <Brain className="h-5 w-5" />}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-white">{topic.title}</h3>
+                    <p className="text-xs text-blue-300">{topic.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Who should attend */}
+          <div>
+            <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+              <GraduationCap className="h-5 w-5 text-orange-400" />
+              Who Should Attend
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {EVENT.audience.map((item, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-blue-200">
+                  <CheckCircle2 className="h-4 w-4 text-green-400 flex-shrink-0" />
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
         </div>

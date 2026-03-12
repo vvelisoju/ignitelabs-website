@@ -55,7 +55,7 @@ const EVENT = {
   // Speaker
   speaker: {
     name: "Dr. Manoj Kumar Gudala",
-    imageUrl: "/assets/images/dr-manoj-gudala.jpg",
+    imageUrl: "/src/assets/images/1574344026393.jpg",
     credentials: [
       { label: "IIT Graduate", highlight: true, badge: true },
       { label: "PhD in Artificial Intelligence", highlight: true, badge: true },
@@ -177,6 +177,18 @@ export default function AICareerDemoPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#060e1f] via-[#0d2247] to-[#0a1628] text-white relative">
+      {/* AI Background Image */}
+      <div 
+        className="absolute inset-0 opacity-[0.08] pointer-events-none z-0"
+        style={{
+          backgroundImage: "url('/assets/images/ai-course.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundBlendMode: "overlay"
+        }}
+      />
+
       {/* AI Particles background */}
       <AIParticles />
 
@@ -185,7 +197,7 @@ export default function AICareerDemoPage() {
 
       {/* Subtle grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
@@ -211,7 +223,7 @@ export default function AICareerDemoPage() {
       </div>
 
       {/* ===== MAIN CONTENT ===== */}
-      <div className="max-w-6xl mx-auto px-6 md:px-10 py-8 md:py-12 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 items-start">
 
           {/* ── LEFT COLUMN: Event Details (3/5 width) ── */}

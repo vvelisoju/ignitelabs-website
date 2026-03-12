@@ -341,13 +341,13 @@ export default function LandingPage() {
       </section>
 
       {/* ===== PROGRAM DETAILS (Blue Section) ===== */}
-      <section id="program-details" className="py-16 bg-gradient-to-b from-blue-700 to-blue-800 text-white" aria-label="AI ML Final Year Project Details Warangal">
+      <section id="program-details" className="py-16 bg-gradient-to-b from-purple-700 to-indigo-800 text-white" aria-label="AI ML Final Year Project Details Warangal">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
               AI / ML Final Year Project — <span className="text-orange-300">Program Details</span>
             </h2>
-            <p className="text-blue-100 max-w-2xl mx-auto">
+            <p className="text-purple-100 max-w-2xl mx-auto">
               Our 8-week intensive program is designed for B.Tech &amp; Degree final year students in Warangal, Hyderabad, and across Telangana.
             </p>
           </div>
@@ -360,7 +360,7 @@ export default function LandingPage() {
               { label: "Batches", value: "Weekend & Weekday Available" },
               { label: "Batch Size", value: "Only 15 Students" },
             ].map((item, i) => (
-              <div key={i} className="bg-white/10 border border-white/20 rounded-xl p-5 text-center">
+              <div key={i} className="bg-purple-600/20 border border-purple-400/30 rounded-xl p-5 text-center backdrop-blur-sm">
                 <p className="text-xs font-bold text-orange-300 uppercase tracking-wider mb-1">{item.label}</p>
                 <p className="text-base font-semibold">{item.value}</p>
               </div>
@@ -369,7 +369,7 @@ export default function LandingPage() {
 
           {/* What You Will Learn + Example Projects */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6">
+            <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 shadow-lg">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <Zap className="h-5 w-5" /> What You Will Learn
               </h3>
@@ -382,11 +382,11 @@ export default function LandingPage() {
                 ))}
               </ul>
             </div>
-            <div className="bg-white/10 border border-white/20 rounded-xl p-6">
+            <div className="bg-purple-600/20 border border-purple-400/30 rounded-xl p-6 backdrop-blur-sm">
               <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
                 <Target className="h-5 w-5" /> Example Project Topics
               </h3>
-              <p className="text-sm text-blue-200 mb-4">Students can choose from projects such as:</p>
+              <p className="text-sm text-purple-200 mb-4">Students can choose from projects such as:</p>
               <ul className="space-y-2.5">
                 {exampleProjects.map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
@@ -395,14 +395,14 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <p className="text-sm text-blue-300 mt-3 italic">(New topics added every semester)</p>
+              <p className="text-sm text-purple-300 mt-3 italic">(New topics added every semester)</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ===== WHAT STUDENTS RECEIVE (White Section) ===== */}
-      <section className="py-16 bg-white" aria-label="What students receive from Ignite Labs Warangal">
+      <section className="py-16 bg-gradient-to-b from-gray-50 to-gray-100" aria-label="What students receive from Ignite Labs Warangal">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
@@ -415,7 +415,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whatStudentsReceive.map((item, i) => (
               <div key={i} className="flex flex-col items-center text-center bg-gray-50 border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-blue-300 transition-all">
-                <div className="bg-blue-600 text-white rounded-full p-4 mb-4">
+                <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full p-4 mb-4 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-300">
                   {item.icon}
                 </div>
                 <h3 className="font-bold text-lg text-gray-900 mb-1">{item.title}</h3>
@@ -435,7 +435,7 @@ export default function LandingPage() {
       </section>
 
       {/* ===== WHO CAN JOIN (Blue Section) ===== */}
-      <section className="py-16 bg-gradient-to-b from-blue-700 to-blue-800 text-white" aria-label="Who can join final year project training Warangal">
+      <section className="py-16 bg-gradient-to-b from-teal-600 to-cyan-700 text-white" aria-label="Who can join final year project training Warangal">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             {/* Who Can Join */}
@@ -457,13 +457,13 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-sm text-blue-200">
+              <p className="mt-5 text-sm text-teal-200">
                 No prior coding experience required — <strong className="text-white">we teach from basics</strong>.
               </p>
             </div>
 
             {/* Why Ignite Labs */}
-            <div className="bg-white/10 border border-white/20 rounded-xl p-6">
+            <div className="bg-teal-600/20 border border-teal-400/30 rounded-xl p-6 backdrop-blur-sm">
               <h2 className="text-2xl md:text-3xl font-extrabold mb-6">
                 Why Students Choose <span className="text-orange-300">Ignite Labs</span>
               </h2>
@@ -488,7 +488,7 @@ export default function LandingPage() {
       </section>
 
       {/* ===== TRENDING PROGRAMS 2026 (White Section) ===== */}
-      <section id="programs" className="py-20 bg-white" aria-label="Trending IT training programs 2026 Warangal Hyderabad">
+      <section id="programs" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50" aria-label="Trending IT training programs 2026 Warangal Hyderabad">
         <div className="container mx-auto px-4">
           <div className="text-center mb-14">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900">
@@ -548,13 +548,13 @@ export default function LandingPage() {
       </section>
 
       {/* ===== WHY CHOOSE IGNITE LABS (Blue Section) ===== */}
-      <section className="py-16 bg-gradient-to-b from-blue-700 to-blue-800 text-white overflow-hidden" aria-label="Why choose Ignite Labs IT training Warangal">
+      <section className="py-16 bg-gradient-to-b from-emerald-600 to-teal-700 text-white overflow-hidden" aria-label="Why choose Ignite Labs IT training Warangal">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
               Why Choose <span className="text-orange-300">Ignite Labs</span>?
             </h2>
-            <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-teal-100 max-w-3xl mx-auto">
               Warangal's trusted IT training institute for real-world project-based learning. Your tech career starts here.
             </p>
           </div>
@@ -577,7 +577,7 @@ export default function LandingPage() {
       </section>
 
       {/* ===== LOCATION & TRUST (White Section) ===== */}
-      <section className="py-16 bg-white" aria-label="Ignite Labs Warangal location and contact">
+      <section className="py-16 bg-gradient-to-b from-orange-50 to-amber-50" aria-label="Ignite Labs Warangal location and contact">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
@@ -590,17 +590,17 @@ export default function LandingPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-center">
+              <div className="bg-orange-100/80 border border-orange-300/50 rounded-xl p-5 text-center backdrop-blur-sm">
                 <MapPin className="h-8 w-8 text-blue-600 mx-auto mb-3" />
                 <h3 className="font-bold text-gray-900 mb-1">Our Address</h3>
                 <p className="text-sm text-gray-600">3rd Floor, Jakotia Complex, Opp. Ratna Hotel, Pochamma Maidan, Warangal, Telangana 506002</p>
               </div>
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-center">
+              <div className="bg-orange-100/80 border border-orange-300/50 rounded-xl p-5 text-center backdrop-blur-sm">
                 <Phone className="h-8 w-8 text-green-600 mx-auto mb-3" />
                 <h3 className="font-bold text-gray-900 mb-1">Call / WhatsApp</h3>
                 <a href="tel:9494644848" className="text-lg font-semibold text-blue-600 hover:text-orange-500 transition-colors">9494 644 848</a>
               </div>
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-center">
+              <div className="bg-orange-100/80 border border-orange-300/50 rounded-xl p-5 text-center backdrop-blur-sm">
                 <Star className="h-8 w-8 text-orange-500 mx-auto mb-3" />
                 <h3 className="font-bold text-gray-900 mb-1">Free Demo Every Week</h3>
                 <p className="text-sm text-gray-600">Register for a free demo class and experience our teaching methodology first-hand.</p>

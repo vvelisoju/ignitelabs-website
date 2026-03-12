@@ -97,7 +97,7 @@ export default function WebsiteHeaderPage() {
     <div className="w-full shadow-md bg-gradient-to-r from-black via-blue-900 to-black text-white sticky top-0 z-50">
       {/* Announcement Banner */}
       <Link href="/ai-ml-career-demo">
-        <div className="w-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 text-white py-2 text-center cursor-pointer hover:from-orange-600 hover:via-orange-700 hover:to-orange-600 transition-all">
+        <div className="w-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 text-white py-1 text-center cursor-pointer hover:from-orange-600 hover:via-orange-700 hover:to-orange-600 transition-all">
           <div className="container mx-auto px-4 flex items-center justify-center gap-2 flex-wrap">
             <Sparkles className="h-4 w-4 animate-pulse" />
             <span className="text-sm md:text-base font-bold">

@@ -255,7 +255,7 @@ export default function AICareerDemoPage() {
                   i === 0 ? (
                     <span key={i}>
                       {part}
-                      <span className="text-orange-300 font-extrabold bg-orange-500/10 px-1.5 py-0.5 rounded">IIT Graduate</span>
+                      <span className="text-orange-300 font-black text-lg md:text-xl bg-gradient-to-r from-orange-500/20 to-orange-600/20 border-2 border-orange-400/50 px-3 py-1.5 rounded-lg shadow-lg shadow-orange-500/30 animate-pulse">IIT Graduate</span>
                     </span>
                   ) : (
                     <span key={i}>
@@ -263,7 +263,7 @@ export default function AICareerDemoPage() {
                         j === 0 ? (
                           <span key={j}>
                             {p2}
-                            <span className="text-blue-300 font-extrabold bg-blue-500/10 px-1.5 py-0.5 rounded">PhD</span>
+                            <span className="text-blue-300 font-black text-lg md:text-xl bg-gradient-to-r from-blue-500/20 to-blue-600/20 border-2 border-blue-400/50 px-3 py-1.5 rounded-lg shadow-lg shadow-blue-500/30 animate-pulse">PhD</span>
                           </span>
                         ) : (
                           <span key={j}>{p2}</span>
@@ -282,7 +282,7 @@ export default function AICareerDemoPage() {
                   <Star className="h-5 w-5" />
                   Worth {EVENT.originalPrice} — {EVENT.currentPrice} Now!
                 </div>
-                <span className="text-sm text-blue-300 font-medium">Limited seats available</span>
+                <span className="text-sm text-blue-300 font-medium">Register now to secure your seat</span>
               </div>
 
               {/* Online / Offline mode cards */}
@@ -296,6 +296,7 @@ export default function AICareerDemoPage() {
                       <div>
                         <p className="text-sm font-bold text-blue-300">Offline Mode</p>
                         <p className="text-[11px] text-blue-400">{EVENT.location}</p>
+                        <p className="text-[10px] text-red-400 font-semibold mt-1">Only 50 seats!</p>
                       </div>
                     </div>
                   )}
@@ -307,6 +308,7 @@ export default function AICareerDemoPage() {
                       <div>
                         <p className="text-sm font-bold text-green-300">Online Mode</p>
                         <p className="text-[11px] text-green-400">Join from anywhere</p>
+                        <p className="text-[10px] text-red-400 font-semibold mt-1">Only 50 seats!</p>
                       </div>
                     </div>
                   )}
@@ -354,10 +356,10 @@ export default function AICareerDemoPage() {
                       .map((c, i) => (
                         <span
                           key={i}
-                          className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-bold ${
+                          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[12px] font-black shadow-lg animate-pulse ${
                             c.label.includes("IIT")
-                              ? "bg-orange-500/20 text-orange-300 border border-orange-400/30"
-                              : "bg-blue-500/20 text-blue-300 border border-blue-400/30"
+                              ? "bg-gradient-to-r from-orange-500/30 to-orange-600/30 text-orange-200 border-2 border-orange-400/60 shadow-orange-500/40"
+                              : "bg-gradient-to-r from-blue-500/30 to-blue-600/30 text-blue-200 border-2 border-blue-400/60 shadow-blue-500/40"
                           }`}
                         >
                           <Award className="h-2.5 w-2.5" />
